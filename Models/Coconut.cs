@@ -6,12 +6,18 @@ using Microsoft.EntityFrameworkCore;
 public class Coconut
 {
     public int Id { get; set; }
-    public int UserId { get; set; }
     public CoconutStatus Status { get; set; }
     public string Isbn { get; set; }
     public string CoverUrl { get; set; }
     public DateOnly StartDate { get; set; }
     public DateOnly EndDate { get; set; }
+
+    //belongs to one user
+    public int UserId { get; set; }
+    public User User { get; set; }
+
+    // has many entries
+    public List<Entry> Entries { get; set; }
 
     public void Bull()
     {

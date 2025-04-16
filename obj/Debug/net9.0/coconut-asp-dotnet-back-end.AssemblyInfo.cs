@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("d539352b-6002-4dc1-9320-67708b406bfb")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("coconut-asp-dotnet-back-end")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d95273fac6edf21843f128bcdc358b3c8e484516")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+baf7a5dbbf2dee310ceb1829f36b162ffb1fcf85")]
 [assembly: System.Reflection.AssemblyProductAttribute("coconut-asp-dotnet-back-end")]
 [assembly: System.Reflection.AssemblyTitleAttribute("coconut-asp-dotnet-back-end")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

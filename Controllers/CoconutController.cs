@@ -9,10 +9,12 @@ using Models;
 public class CoconutController : ControllerBase
 {
     private readonly ILogger<CoconutController> _logger;
+    private readonly CoconutContext _dbcontext;
 
-    public CoconutController(ILogger<CoconutController> logger)
+    public CoconutController(ILogger<CoconutController> logger, CoconutContext coconutContext)
     {
         _logger = logger;
+        _dbcontext = coconutContext;
     }
 
     [HttpGet(Name = "GetCoconut")]
