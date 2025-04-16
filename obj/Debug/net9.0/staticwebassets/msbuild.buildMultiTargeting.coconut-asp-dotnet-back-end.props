@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/coconut-asp-dotnet-back-end.props" />
+</Project>

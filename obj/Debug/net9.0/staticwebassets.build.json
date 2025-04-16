@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "F7GKxl1XyFKRG/4BVQjZhQ4cj1SCFgy/3du6vRHDtXU=",
+  "Source": "coconut-asp-dotnet-back-end",
+  "BasePath": "_content/coconut-asp-dotnet-back-end",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
