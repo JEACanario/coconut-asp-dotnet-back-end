@@ -14,21 +14,8 @@ public class Coconut
 
     //belongs to one user
     public int UserId { get; set; }
-    public User User { get; set; }
+    public User? User { get; set; }
 
     // has many entries
-    public List<Entry> Entries { get; set; }
-
-    public void Bull()
-    {
-        var joao = new Coconut
-        {
-            UserId = 5,
-            Status = (CoconutStatus)2,
-            Isbn = "XIOIT",
-            CoverUrl = "http",
-            StartDate = DateOnly.FromDateTime(DateTime.Today),
-            EndDate = DateOnly.MinValue,
-        };
-    }
+    public List<Entry> Entries { get; set; } = new List<Entry>();
 }

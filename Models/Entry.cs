@@ -11,5 +11,5 @@ public class Entry
     public string Content { set; get; }
 
     public int CoconutId { get; set; }
-    public Coconut Coconut { get; set; }
+    public Coconut Coconut { get; set; } = null!;
 }

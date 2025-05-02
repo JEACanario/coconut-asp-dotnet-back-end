@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/icZaGWg+DI=",
+  "dgSpecHash": "huQgZSSasEg=",
   "success": true,
   "projectFilePath": "/home/b1rd/code/JEACanario/CoCoNuT/coconut-asp-dotnet-back-end/coconut-asp-dotnet-back-end.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,7 @@
     "/home/b1rd/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.4/microsoft.entityframeworkcore.analyzers.9.0.4.nupkg.sha512",
     "/home/b1rd/.nuget/packages/microsoft.entityframeworkcore.design/9.0.4/microsoft.entityframeworkcore.design.9.0.4.nupkg.sha512",
     "/home/b1rd/.nuget/packages/microsoft.entityframeworkcore.relational/9.0.4/microsoft.entityframeworkcore.relational.9.0.4.nupkg.sha512",
+    "/home/b1rd/.nuget/packages/microsoft.entityframeworkcore.tools/9.0.4/microsoft.entityframeworkcore.tools.9.0.4.nupkg.sha512",
     "/home/b1rd/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.4/microsoft.extensions.caching.abstractions.9.0.4.nupkg.sha512",
     "/home/b1rd/.nuget/packages/microsoft.extensions.caching.memory/9.0.4/microsoft.extensions.caching.memory.9.0.4.nupkg.sha512",
     "/home/b1rd/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.4/microsoft.extensions.configuration.abstractions.9.0.4.nupkg.sha512",

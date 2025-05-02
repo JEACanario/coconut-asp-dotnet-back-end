@@ -13,5 +13,9 @@ public class CoconutContext(DbContextOptions<CoconutContext> options) : DbContex
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Coconut>().Property(b => b.Status).IsRequired();
+
+        modelBuilder.Entity<Coconut>().ToTable("Coconut");
+        modelBuilder.Entity<Entry>().ToTable("Entry");
+        modelBuilder.Entity<User>().ToTable("User");
     }
 }
