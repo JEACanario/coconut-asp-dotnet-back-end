@@ -1,6 +1,7 @@
 namespace coconut_asp_dotnet_back_end.Data;
 
 using coconut_asp_dotnet_back_end.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 public static class DbInitializer
@@ -18,57 +19,63 @@ public static class DbInitializer
             new User
             {
                 Email = "Carson@mail.com",
-                Password = "Carson",
+
                 Name = "Carson",
             },
             new User
             {
                 Email = "Meredith@mail.com",
-                Password = "Meredith",
+
                 Name = "Meredith",
             },
             new User
             {
                 Email = "Arturo@mail.com",
-                Password = "Arturo",
+
                 Name = "Arturo",
             },
             new User
             {
                 Email = "Gytis@mail.com",
-                Password = "Gytis",
+
                 Name = "Gytis",
             },
             new User
             {
                 Email = "Yan@mail.com",
-                Password = "Yan",
+
                 Name = "Yan",
             },
             new User
             {
                 Email = "Peggy@mail.com",
-                Password = "Peggy",
+
                 Name = "Peggy",
             },
             new User
             {
                 Email = "Laura@mail.com",
-                Password = "Laura",
+
                 Name = "Laura",
             },
             new User
             {
                 Email = "Nino@mail.com",
-                Password = "Nino",
+
                 Name = "Nino",
             },
         };
+
+        foreach (var user in users)
+        {
+            var password = new PasswordHasher<User>();
+            var hashed = password.HashPassword(user, "secret");
+            user.PasswordHash = hashed;
+        }
+
         context.Users.AddRange(users);
         context.SaveChanges();
-
-        Console.WriteLine(context.Users.Where(u => u.Id == 1).First());
-
+        var db_users = context.Users.ToArray();
         var coconuts = new Coconut[]
         {
             new Coconut
@@ -78,8 +85,8 @@ public static class DbInitializer
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
-                UserId = 1,
-                User = context.Users.Where(u => u.Id == 1).First(),
+                UserId = users[0].Id,
+                User = users[0],
             },
             new Coconut
             {
@@ -88,7 +95,8 @@ public static class DbInitializer
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
-                UserId = 2,
+                UserId = users[1].Id,
+                User = users[1],
             },
             new Coconut
             {
@@ -97,7 +105,8 @@ public static class DbInitializer
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
-                UserId = 3,
+                UserId = users[2].Id,
+                User = users[2],
             },
             new Coconut
             {
@@ -106,7 +115,8 @@ public static class DbInitializer
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
-                UserId = 4,
+                UserId = users[3].Id,
+                User = users[3],
             },
             new Coconut
             {
@@ -115,7 +125,8 @@ public static class DbInitializer
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
-                UserId = 1,
+                UserId = users[0].Id,
+                User = users[0],
             },
             new Coconut
             {
@@ -124,7 +135,8 @@ public static class DbInitializer
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
-                UserId = 2,
+                UserId = users[1].Id,
+                User = users[1],
             },
             new Coconut
             {
@@ -133,7 +145,8 @@ public static class DbInitializer
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
-                UserId = 3,
+                UserId = users[2].Id,
+                User = users[2],
             },
             new Coconut
             {
@@ -142,7 +155,8 @@ public static class DbInitializer
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
-                UserId = 4,
+                UserId = users[3].Id,
+                User = users[3],
             },
         };
 
@@ -239,6 +253,6 @@ public static class DbInitializer
 
         context.Entries.AddRange(entries);
         context.SaveChanges();
-        Console.WriteLine(context.Users.Where(u => u.Id == 1).First().Name);
+        Console.WriteLine(context.Users.First().Name);
     }
 }

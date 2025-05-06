@@ -13,7 +13,7 @@ public class Coconut
     public DateOnly EndDate { get; set; }
 
     //belongs to one user
-    public int UserId { get; set; }
+    public string UserId { get; set; }
     public User? User { get; set; }
 
     // has many entries

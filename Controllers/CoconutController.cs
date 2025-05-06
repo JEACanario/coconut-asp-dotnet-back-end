@@ -17,23 +17,23 @@ public class CoconutController : ControllerBase
         _dbcontext = coconutContext;
     }
 
+    [HttpGet("{id}")]
+    public ActionResult<Coconut> Get(int id)
+    {
+        var coconuts = _dbcontext.Coconuts;
+        var coconut = coconuts.Find(id);
+
+        if (coconut == null)
+            return NotFound();
+
+        return coconut;
+    }
+
     [HttpGet(Name = "GetCoconut")]
     public IEnumerable<Coconut> Get()
     {
         var coconuts = _dbcontext.Coconuts;
-        return coconuts; /* Enumerable
-            .Range(1, 5)
-            .Select(index => new Coconut
-            {
-                Id = index,
-                UserId = index + 10,
-                Status = (CoconutStatus)Random.Shared.Next(Enum.GetNames<CoconutStatus>().Length),
-                Isbn = Random.Shared.Next(0, 1000000).ToString(),
-                CoverUrl = "url",
-                StartDate = DateOnly.FromDateTime(DateTime.Now.AddDays(0 - index)),
-                EndDate = DateOnly.FromDateTime(DateTime.MinValue.AddDays(index)),
-            })
-            .ToArray(); ;*/
+        return coconuts;
     }
 
     [HttpPost]
