@@ -35,7 +35,7 @@ internal class Program
 
         // Activate Identity APIs
         builder
-            .Services.AddIdentityApiEndpoints<User>()
+            .Services.AddIdentityApiEndpoints<AppUser>()
             .AddEntityFrameworkStores<CoconutContext>();
 
         var app = builder.Build();
@@ -52,7 +52,7 @@ internal class Program
 
         //Add Identity Routes
 
-        app.MapIdentityApi<IdentityUser>();
+        app.MapIdentityApi<AppUser>();
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {

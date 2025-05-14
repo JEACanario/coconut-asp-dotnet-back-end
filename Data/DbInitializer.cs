@@ -14,51 +14,51 @@ public static class DbInitializer
             return; // DB has been seeded
         }
 
-        var users = new User[]
+        var users = new AppUser[]
         {
-            new User
+            new AppUser
             {
                 Email = "Carson@mail.com",
 
                 Name = "Carson",
             },
-            new User
+            new AppUser
             {
                 Email = "Meredith@mail.com",
 
                 Name = "Meredith",
             },
-            new User
+            new AppUser
             {
                 Email = "Arturo@mail.com",
 
                 Name = "Arturo",
             },
-            new User
+            new AppUser
             {
                 Email = "Gytis@mail.com",
 
                 Name = "Gytis",
             },
-            new User
+            new AppUser
             {
                 Email = "Yan@mail.com",
 
                 Name = "Yan",
             },
-            new User
+            new AppUser
             {
                 Email = "Peggy@mail.com",
 
                 Name = "Peggy",
             },
-            new User
+            new AppUser
             {
                 Email = "Laura@mail.com",
 
                 Name = "Laura",
             },
-            new User
+            new AppUser
             {
                 Email = "Nino@mail.com",
 
@@ -66,9 +66,11 @@ public static class DbInitializer
             },
         };
 
+
+
         foreach (var user in users)
         {
-            var password = new PasswordHasher<User>();
+            var password = new PasswordHasher<AppUser>();
             var hashed = password.HashPassword(user, "secret");
             user.PasswordHash = hashed;
         }

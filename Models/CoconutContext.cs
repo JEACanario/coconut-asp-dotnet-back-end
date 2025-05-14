@@ -12,16 +12,15 @@ public class CoconutContext(DbContextOptions<CoconutContext> options)
     public DbSet<Coconut> Coconuts { get; set; }
     public DbSet<Entry> Entries { get; set; }
 
-    public new DbSet<User> Users { get; set; }
+    public new DbSet<AppUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Coconut>().Property(b => b.Status).IsRequired();
 
-
         modelBuilder.Entity<Coconut>().ToTable("Coconut");
         modelBuilder.Entity<Entry>().ToTable("Entry");
-        modelBuilder.Entity<User>().ToTable("User");
+        modelBuilder.Entity<AppUser>().ToTable("AppUser");
         base.OnModelCreating(modelBuilder);
     }
 

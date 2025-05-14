@@ -285,7 +285,7 @@ namespace coconut_asp_dotnet_back_end.Migrations
                     b.ToTable("Entry", (string)null);
                 });
 
-            modelBuilder.Entity("coconut_asp_dotnet_back_end.Models.User", b =>
+            modelBuilder.Entity("coconut_asp_dotnet_back_end.Models.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -293,7 +293,7 @@ namespace coconut_asp_dotnet_back_end.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("AppUser", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -349,7 +349,7 @@ namespace coconut_asp_dotnet_back_end.Migrations
 
             modelBuilder.Entity("coconut_asp_dotnet_back_end.Models.Coconut", b =>
                 {
-                    b.HasOne("coconut_asp_dotnet_back_end.Models.User", "User")
+                    b.HasOne("coconut_asp_dotnet_back_end.Models.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -369,11 +369,11 @@ namespace coconut_asp_dotnet_back_end.Migrations
                     b.Navigation("Coconut");
                 });
 
-            modelBuilder.Entity("coconut_asp_dotnet_back_end.Models.User", b =>
+            modelBuilder.Entity("coconut_asp_dotnet_back_end.Models.AppUser", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithOne()
-                        .HasForeignKey("coconut_asp_dotnet_back_end.Models.User", "Id")
+                        .HasForeignKey("coconut_asp_dotnet_back_end.Models.AppUser", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

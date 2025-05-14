@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace coconut_asp_dotnet_back_end.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,6 +68,24 @@ namespace coconut_asp_dotnet_back_end.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUser",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUser", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppUser_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -158,24 +176,6 @@ namespace coconut_asp_dotnet_back_end.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_User_AspNetUsers_Id",
-                        column: x => x.Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Coconut",
                 columns: table => new
                 {
@@ -192,9 +192,9 @@ namespace coconut_asp_dotnet_back_end.Migrations
                 {
                     table.PrimaryKey("PK_Coconut", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Coconut_User_UserId",
+                        name: "FK_Coconut_AppUser_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "AppUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -297,7 +297,7 @@ namespace coconut_asp_dotnet_back_end.Migrations
                 name: "Coconut");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "AppUser");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
