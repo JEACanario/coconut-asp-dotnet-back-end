@@ -10,6 +10,27 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        //CORS Policy to stop me from hurting myself
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(
+                name: "CORSPolicy",
+                policy =>
+                {
+                    policy
+                        .WithOrigins(
+                            "http://localhost:5173/",
+                            "https://localhost:5173/",
+                            "http://127.0.0.1:5173/",
+                            "https://127.0.0.1:5173/"
+                        )
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                }
+            );
+        });
+
         // Add services to the container.
 
         builder.Services.AddControllers();
@@ -33,10 +54,11 @@ internal class Program
         // Add Identity services to the container
         builder.Services.AddAuthorization();
 
-        // Activate Identity APIs
+        // Activate Identity APIs & usermanager for AppUserController
         builder
             .Services.AddIdentityApiEndpoints<AppUser>()
-            .AddEntityFrameworkStores<CoconutContext>();
+            .AddEntityFrameworkStores<CoconutContext>()
+            .AddUserManager<UserManager<AppUser>>();
 
         var app = builder.Build();
 
@@ -56,6 +78,8 @@ internal class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
+            // app.UseCors("CORSPolicy");
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.MapOpenApi();
             Console.WriteLine("API Mapped");
         }

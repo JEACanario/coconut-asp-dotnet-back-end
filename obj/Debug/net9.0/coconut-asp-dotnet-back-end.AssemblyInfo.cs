@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("coconut-asp-dotnet-back-end")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd4999b17b3f8d0b0aedb6fccebbbcfd9ba6f605")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d19bd29591121458d621c23fd57fd16eda688ba2")]
 [assembly: System.Reflection.AssemblyProductAttribute("coconut-asp-dotnet-back-end")]
 [assembly: System.Reflection.AssemblyTitleAttribute("coconut-asp-dotnet-back-end")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
