@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace coconut_asp_dotnet_back_end.Models;
 
 public class Entry
@@ -11,5 +13,6 @@ public class Entry
     public string Content { set; get; }
 
     public int CoconutId { get; set; }
+    [JsonIgnore]
     public Coconut Coconut { get; set; } = null!;
 }

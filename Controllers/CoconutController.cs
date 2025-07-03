@@ -29,14 +29,14 @@ public class CoconutController : ControllerBase
         return coconut;
     }
 
-    [HttpGet(Name = "GetCoconut")]
+    [HttpGet(Name = "GetCoconuts")]
     public IEnumerable<Coconut> Get()
     {
         var coconuts = _dbcontext.Coconuts;
         return coconuts;
     }
 
-    [HttpPost]
+    [HttpPost(Name = "CreateCoconut")]
     public IActionResult Create(Coconut coconut)
     {
         var coconuts = _dbcontext.Coconuts;
@@ -45,7 +45,7 @@ public class CoconutController : ControllerBase
         return CreatedAtAction(nameof(Get), new { id = coconut.Id }, coconut);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id}", Name = "UpdateCoconut")]
     public IActionResult Update(int id, Coconut coconut)
     {
         if (id != coconut.Id)
@@ -70,7 +70,7 @@ public class CoconutController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}", Name = "DeleteCoconut")]
     public IActionResult Delete(int id)
     {
         var coconut = _dbcontext.Coconuts.Find(id);
@@ -81,5 +81,17 @@ public class CoconutController : ControllerBase
         _dbcontext.Coconuts.Remove(coconut);
         _dbcontext.SaveChanges();
         return NoContent();
+    }
+
+    [HttpGet("{id}/entry", Name = "GetCoconutEntries")]
+    public IEnumerable<Entry> GetCoconutEntries(int id)
+    {
+        var coconut = _dbcontext.Coconuts.Find(id);
+
+        if (coconut is null)
+            return Enumerable.Empty<Entry>();
+
+        var entries = _dbcontext.Entries.Where(e => e.CoconutId == id).ToList();
+        return entries;
     }
 }

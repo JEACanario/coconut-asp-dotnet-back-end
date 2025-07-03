@@ -17,5 +17,5 @@ public class Coconut
     public AppUser? User { get; set; }
 
     // has many entries
-    public List<Entry> Entries { get; set; } = new List<Entry>();
+    public List<Entry> Entries { get; set; } = [];
 }

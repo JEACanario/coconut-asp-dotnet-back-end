@@ -83,7 +83,7 @@ public static class DbInitializer
             new Coconut
             {
                 Status = CoconutStatus.New,
-                Isbn = "Alexander",
+                Isbn = "OL31976993M",
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
@@ -93,7 +93,7 @@ public static class DbInitializer
             new Coconut
             {
                 Status = CoconutStatus.New,
-                Isbn = "Alonso",
+                Isbn = "OL32670252M",
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
@@ -103,7 +103,7 @@ public static class DbInitializer
             new Coconut
             {
                 Status = CoconutStatus.New,
-                Isbn = "Anand",
+                Isbn = "OL24629791M",
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
@@ -113,7 +113,7 @@ public static class DbInitializer
             new Coconut
             {
                 Status = CoconutStatus.New,
-                Isbn = "Barzdukas",
+                Isbn = "OL35333849M",
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
@@ -123,7 +123,7 @@ public static class DbInitializer
             new Coconut
             {
                 Status = CoconutStatus.New,
-                Isbn = "Li",
+                Isbn = "OL49273234M",
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
@@ -133,7 +133,7 @@ public static class DbInitializer
             new Coconut
             {
                 Status = CoconutStatus.New,
-                Isbn = "Justice",
+                Isbn = "OL3174961M",
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
@@ -143,7 +143,7 @@ public static class DbInitializer
             new Coconut
             {
                 Status = CoconutStatus.New,
-                Isbn = "Norman",
+                Isbn = "OL7660473M",
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),
@@ -153,7 +153,7 @@ public static class DbInitializer
             new Coconut
             {
                 Status = CoconutStatus.New,
-                Isbn = "Olivetto",
+                Isbn = "OL28424870M",
                 CoverUrl = "",
                 StartDate = DateOnly.FromDateTime(DateTime.Today),
                 EndDate = DateOnly.FromDateTime(DateTime.Today),

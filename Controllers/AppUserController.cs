@@ -23,7 +23,7 @@ public class AppUserController : ControllerBase
         var result = IdentityResult.Failed();
 
         if (user != null)
-            result = await _userManager.UpdateAsync(user);
+            result = await _userManager.UpdateAsync(model);
 
         if (result.Succeeded)
         {
