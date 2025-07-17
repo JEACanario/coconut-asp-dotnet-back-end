@@ -33,6 +33,17 @@ public class CoconutController : ControllerBase
     public IEnumerable<Coconut> Get()
     {
         var coconuts = _dbcontext.Coconuts;
+
+        var request = HttpContext.Request;
+        Console.WriteLine($"Request by user: {User.Identity?.Name ?? "Anonymous"}");
+        Console.WriteLine("Request Information:");
+        Console.WriteLine($"Request Method: {request.Method}");
+        Console.WriteLine($"Request Path: {request.Path}");
+        Console.WriteLine($"Request Query String: {request.QueryString}");
+        Console.WriteLine(
+            $"Request Headers: {string.Join(", ", request.Headers.Select(h => $"{h.Key}: {h.Value}"))}"
+        );
+        Console.WriteLine($"Request Body: {request.Body}");
         return coconuts;
     }
 
