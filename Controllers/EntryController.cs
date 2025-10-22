@@ -41,13 +41,14 @@ public class EntryController : ControllerBase
     }
 
     // We don't need to specify the coconut_id in the route, as it is already part of the Entry model
-    [HttpPut("/entry/{id}", Name = "UpdateEntry")]
-    public IActionResult Update(int coconut_id, int id, Entry entry)
+    [HttpPut("{id}", Name = "UpdateEntry")]
+    public IActionResult Update(int id, Entry entry)
     {
-        if (id != entry.Id)
-            return BadRequest();
+        var coconut_id = entry.CoconutId;
 
-        if (coconut_id != entry.CoconutId)
+        Console.WriteLine($"Coconut ID from entry: {coconut_id}");
+
+        if (id != entry.Id)
             return BadRequest();
 
         var user_id = User.Identity?.Name;

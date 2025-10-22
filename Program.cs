@@ -1,3 +1,4 @@
+using System.Text;
 using coconut_asp_dotnet_back_end.Data;
 using coconut_asp_dotnet_back_end.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -67,15 +68,31 @@ internal class Program
         builder.Services.AddAuthorization();
 
         // Cookie settings for cross-site requests
-        /*       builder.Services.Configure<CookieAuthenticationOptions>(
-                  IdentityConstants.ApplicationScheme,
-                  options =>
-                  {
-                      options.Cookie.SameSite = SameSiteMode.None;
-                      options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                  }
-              );
-       */
+        builder.Services.PostConfigure<CookieAuthenticationOptions>(
+            IdentityConstants.ApplicationScheme,
+            o =>
+            {
+                o.Cookie.SameSite = SameSiteMode.None;
+                o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            }
+        );
+        builder.Services.PostConfigure<CookieAuthenticationOptions>(
+            IdentityConstants.ExternalScheme,
+            o =>
+            {
+                o.Cookie.SameSite = SameSiteMode.None;
+                o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            }
+        );
+        builder.Services.PostConfigure<CookieAuthenticationOptions>(
+            IdentityConstants.TwoFactorUserIdScheme,
+            o =>
+            {
+                o.Cookie.SameSite = SameSiteMode.None;
+                o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            }
+        );
+
         var app = builder.Build();
 
         if (!app.Environment.IsDevelopment())
@@ -110,6 +127,46 @@ internal class Program
             app.MapGet(
                 "/debug/routes",
                 (IEnumerable<EndpointDataSource> endpointSources) =>
+                {
+                    var sb = new StringBuilder();
+                    var endpoints = endpointSources.SelectMany(es => es.Endpoints);
+                    foreach (var endpoint in endpoints)
+                    {
+                        if (endpoint is RouteEndpoint routeEndpoint)
+                        {
+                            sb.AppendLine($"Route: {routeEndpoint.RoutePattern.RawText}");
+                            sb.AppendLine(
+                                $"Path Segments: {string.Join(", ", routeEndpoint.RoutePattern.PathSegments)}"
+                            );
+                            sb.AppendLine(
+                                $"Parameters: {string.Join(", ", routeEndpoint.RoutePattern.Parameters)}"
+                            );
+                            sb.AppendLine(
+                                $"Inbound Precedence: {routeEndpoint.RoutePattern.InboundPrecedence}"
+                            );
+                            sb.AppendLine(
+                                $"Outbound Precedence: {routeEndpoint.RoutePattern.OutboundPrecedence}"
+                            );
+                        }
+
+                        var routeNameMetadata = endpoint
+                            .Metadata.OfType<Microsoft.AspNetCore.Routing.RouteNameMetadata>()
+                            .FirstOrDefault();
+                        sb.AppendLine($"Route Name: {routeNameMetadata?.RouteName}");
+
+                        var httpMethodsMetadata = endpoint
+                            .Metadata.OfType<HttpMethodMetadata>()
+                            .FirstOrDefault();
+                        sb.AppendLine(
+                            $"HTTP Methods: {string.Join(", ", httpMethodsMetadata?.HttpMethods ?? Array.Empty<string>())}"
+                        );
+                    }
+                    return sb.ToString();
+                }
+            );
+            app.MapGet(
+                "/debug/routes2",
+                (IEnumerable<EndpointDataSource> endpointSources) =>
                     string.Join("\n", endpointSources.SelectMany(source => source.Endpoints))
             );
             Console.WriteLine("API Mapped");
@@ -125,6 +182,13 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseCookiePolicy(
+            new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.None,
+                Secure = CookieSecurePolicy.Always,
+            }
+        );
 
         app.UseAuthentication();
 
