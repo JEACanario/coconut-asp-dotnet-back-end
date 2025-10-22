@@ -1,5 +1,6 @@
 using coconut_asp_dotnet_back_end.Data;
 using coconut_asp_dotnet_back_end.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +20,10 @@ internal class Program
                 {
                     policy
                         .WithOrigins(
-                            "http://localhost:5173/",
-                            "https://localhost:5173/",
-                            "http://127.0.0.1:5173/",
-                            "https://127.0.0.1:5173/"
+                            "http://localhost:5173",
+                            "https://localhost:5173",
+                            "http://127.0.0.1:5173",
+                            "https://127.0.0.1:5173"
                         )
                         .AllowAnyHeader()
                         .AllowAnyMethod()
@@ -52,7 +53,10 @@ internal class Program
         );
 
         // Add Identity services to the container
-        builder.Services.AddAuthorization();
+
+
+        //builder.Services.AddAuthorizationBuilder();
+
 
         // Activate Identity APIs & usermanager for AppUserController
         builder
@@ -60,6 +64,18 @@ internal class Program
             .AddEntityFrameworkStores<CoconutContext>()
             .AddUserManager<UserManager<AppUser>>();
 
+        builder.Services.AddAuthorization();
+
+        // Cookie settings for cross-site requests
+        /*       builder.Services.Configure<CookieAuthenticationOptions>(
+                  IdentityConstants.ApplicationScheme,
+                  options =>
+                  {
+                      options.Cookie.SameSite = SameSiteMode.None;
+                      options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                  }
+              );
+       */
         var app = builder.Build();
 
         if (!app.Environment.IsDevelopment())
@@ -78,9 +94,24 @@ internal class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            // app.UseCors("CORSPolicy");
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors("CORSPolicy");
+            /* app.UseCors(x =>
+                x.WithOrigins(
+                        "http://localhost:5173",
+                        "https://localhost:5173",
+                        "http://127.0.0.1:5173",
+                        "https://127.0.0.1:5173"
+                    )
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+            ) ;*/
             app.MapOpenApi();
+            app.MapGet(
+                "/debug/routes",
+                (IEnumerable<EndpointDataSource> endpointSources) =>
+                    string.Join("\n", endpointSources.SelectMany(source => source.Endpoints))
+            );
             Console.WriteLine("API Mapped");
         }
 
@@ -94,6 +125,8 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseAuthentication();
 
         app.UseAuthorization();
 

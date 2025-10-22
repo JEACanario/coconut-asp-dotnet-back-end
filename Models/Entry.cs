@@ -6,13 +6,14 @@ public class Entry
 {
     public int Id { set; get; }
 
-    public string Title { set; get; }
+    public string? Title { set; get; }
 
     public DateOnly CreationDate { set; get; }
 
-    public string Content { set; get; }
+    public string? Content { set; get; }
 
     public int CoconutId { get; set; }
+
     [JsonIgnore]
     public Coconut Coconut { get; set; } = null!;
 }
