@@ -13,7 +13,7 @@ namespace coconut_asp_dotnet_back_end.Migrations
 {
     [DbContext(typeof(CoconutContext))]
     [Migration("20250514221925_initial-migration")]
-    partial class initialmigration
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
