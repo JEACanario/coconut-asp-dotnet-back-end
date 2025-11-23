@@ -58,7 +58,9 @@ internal class Program
         }
         else
         {
-            var con = Environment.GetEnvironmentVariable("AZURE_POSTGRESQL_CONNECTIONSTRING");
+            var con = Environment.GetEnvironmentVariable(
+                "CUSTOMCONNSTR_AZURE_POSTGRESQL_CONNECTIONSTRING"
+            );
             builder.Services.AddDbContextPool<CoconutContext>(opt =>
                 opt.UseNpgsql(con, o => o.SetPostgresVersion(14, 0))
             );
