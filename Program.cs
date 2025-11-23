@@ -189,13 +189,17 @@ internal class Program
             app.UseCors("CORSPolicy");
         }
 
-        using (var scope = app.Services.CreateScope())
+        //basic seeding
+        if (builder.Environment.IsDevelopment())
         {
-            var services = scope.ServiceProvider;
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
 
-            var context = services.GetRequiredService<CoconutContext>();
+                var context = services.GetRequiredService<CoconutContext>();
 
-            DbInitializer.Initialize(context);
+                DbInitializer.Initialize(context);
+            }
         }
 
         app.UseHttpsRedirection();
