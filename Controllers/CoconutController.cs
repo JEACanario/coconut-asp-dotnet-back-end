@@ -8,6 +8,7 @@ using Models;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class CoconutController : ControllerBase
 {
     private readonly ILogger<CoconutController> _logger;

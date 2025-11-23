@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using coconut_asp_dotnet_back_end.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace coconut_asp_dotnet_back_end.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class EntryController : ControllerBase
 {
     private readonly ILogger<EntryController> _logger;
@@ -87,5 +89,25 @@ public class EntryController : ControllerBase
 
         var entries = _dbcontext.Entries.Where(e => e.CoconutId == id).ToList();
         return entries;
+    }
+
+    [HttpDelete("{id}", Name = "DeleteEntry")]
+    public IActionResult Delete(int id)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var entry = _dbcontext.Entries.Find(id);
+
+        if (entry is null)
+            return NotFound();
+
+        // Verify user owns the coconut this entry belongs to
+        var coconut = _dbcontext.Coconuts.Find(entry.CoconutId);
+        if (coconut?.UserId != userId)
+            return Forbid();
+
+        _dbcontext.Entries.Remove(entry);
+        _dbcontext.SaveChanges();
+
+        return NoContent();
     }
 }

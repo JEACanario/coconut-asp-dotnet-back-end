@@ -46,12 +46,25 @@ internal class Program
         var CoconutDBpassword = builder.Configuration["Coconut:DBpassword"];
 
         //Setting up PostgresDB context for Models using Coconut Context
-        builder.Services.AddDbContextPool<CoconutContext>(opt =>
-            opt.UseNpgsql(
-                $"Host={CoconutDBHost};Username={CoconutDBuser};Password={CoconutDBpassword};Database=coconut",
-                o => o.SetPostgresVersion(13, 0)
-            )
-        );
+
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddDbContextPool<CoconutContext>(opt =>
+                opt.UseNpgsql(
+                    $"Host={CoconutDBHost};Username={CoconutDBuser};Password={CoconutDBpassword};Database=coconut",
+                    o => o.SetPostgresVersion(13, 0)
+                )
+            );
+        }
+        else
+        {
+            builder.Services.AddDbContextPool<CoconutContext>(opt =>
+                opt.UseNpgsql(
+                    Environment.GetEnvironmentVariable("AZURE_POSTGRESQL_CONNECTIONSTRING"),
+                    o => o.SetPostgresVersion(14, 0)
+                )
+            );
+        }
 
         // Add Identity services to the container
 
@@ -170,6 +183,10 @@ internal class Program
                     string.Join("\n", endpointSources.SelectMany(source => source.Endpoints))
             );
             Console.WriteLine("API Mapped");
+        }
+        else
+        {
+            app.UseCors("CORSPolicy");
         }
 
         using (var scope = app.Services.CreateScope())
