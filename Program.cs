@@ -31,6 +31,7 @@ internal class Program
                             "http://coconut.spot",
                             "https://www.coconut.spot",
                             "http://www.coconut.spot",
+                            "http://jeacanario.github.io/coconut-react-heroui-front-end",
                             "https://jeacanario.github.io/coconut-react-heroui-front-end",
                             "http://jeacanario.github.io/coconut-react-heroui-front-end",
                             "https://jeacanario.github.io",
