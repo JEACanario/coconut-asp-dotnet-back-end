@@ -24,7 +24,13 @@ internal class Program
                             "http://localhost:5173",
                             "https://localhost:5173",
                             "http://127.0.0.1:5173",
-                            "https://127.0.0.1:5173"
+                            "https://127.0.0.1:5173",
+                            "https://coconut-gtcrbzgmckekarcb.westeurope-01.azurewebsites.net/",
+                            "http://coconut-gtcrbzgmckekarcb.westeurope-01.azurewebsites.net/",
+                            "https://coconut.spot/",
+                            "http://coconut.spot/",
+                            "https://www.coconut.spot/",
+                            "http://www.coconut.spot/"
                         )
                         .AllowAnyHeader()
                         .AllowAnyMethod()
