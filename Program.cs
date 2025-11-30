@@ -32,7 +32,9 @@ internal class Program
                             "https://www.coconut.spot",
                             "http://www.coconut.spot",
                             "https://jeacanario.github.io/coconut-react-heroui-front-end",
-                            "http://jeacanario.github.io/coconut-react-heroui-front-end"
+                            "http://jeacanario.github.io/coconut-react-heroui-front-end",
+                            "https://jeacanario.github.io",
+                            "http://jeacanario.github.io"
                         )
                         .AllowAnyHeader()
                         .AllowAnyMethod()
