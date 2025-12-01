@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace coconut_asp_dotnet_back_end.Controllers;
 
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Models;
 
@@ -33,5 +35,19 @@ public class AppUserController : ControllerBase
 
         // If registration fails, return errors
         return BadRequest(new { Errors = result.Errors });
+    }
+
+    [HttpPost("logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        // Sign out of the Identity cookie scheme and external scheme
+        await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+        await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+        // Best-effort cookie removal (default Identity cookie name)
+        HttpContext.Response.Cookies.Delete(".AspNetCore.Identity.Application");
+
+        return NoContent();
     }
 }
