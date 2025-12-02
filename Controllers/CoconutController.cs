@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace coconut_asp_dotnet_back_end.Controllers;
 
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Models;
@@ -39,11 +40,12 @@ public class CoconutController : ControllerBase
     }
 
     [HttpGet(Name = "GetCoconuts")]
-    public IEnumerable<Coconut> Get()
+    public async Task<IEnumerable<Coconut>> Get()
     {
         var coconuts = _dbcontext.Coconuts;
 
         var request = HttpContext.Request;
+        var user = await _userManager.GetUserAsync(HttpContext.User);
         //Debugging info to trace requests:
         Console.WriteLine($"Request by user: {HttpContext.User.Identity?.Name ?? "Anonymous"}");
         Console.WriteLine("Request Information:");
@@ -55,7 +57,10 @@ public class CoconutController : ControllerBase
         );
         Console.WriteLine($"Request Body: {request.Body}");
         //End Debugging info
-        return coconuts;
+        if (user == null)
+            return Enumerable.Empty<Coconut>();
+        else
+            return coconuts.Where(c => c.UserId == user.Id);
     }
 
     [HttpPost(Name = "CreateCoconut")]
